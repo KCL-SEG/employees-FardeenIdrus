@@ -1,96 +1,34 @@
 """Employee pay calculator."""
 """ENTER YOUR SOLUTION HERE!"""
 
+from contracts import SalaryContract, HourlyContract, ContractCommision, BonusCommision, Payroll
+
 class Employee:
-    def __init__(self, name):
+    def __init__(self, name, payroll):
         self.name = name
+        self.payroll = payroll
 
     def get_pay(self):
-        pass
+        return self.payroll.get_amount()
 
     def __str__(self):
-        return self.name
+        return self.name+" "+self.payroll.get_text()
+    
+billie_payroll = Payroll(SalaryContract(4000), None)
+billie = Employee('Billie', billie_payroll)
 
-class salaryContract:
-    def __init__(self,salary):
-        self.salary= salary
-        
-    def getAmount(self):
-        return self.salary
-    
-    def printText(self):
-        return f'monthly salary of {self.salary}'
-    
-class hourlyContract:
-    def __init__(self,rate,hours):
-        self.rate = rate
-        self.hours = hours
-        
-    def getAmount(self):
-        return self.rate * self.hours
-    
-    def printText(self):
-        return f'contract work of {self.hours} paid at {self.rate} per hour'
-    
-class contractCommision:
-    def __init__(self, commissionAmount, numOfCommission):
-        self.commision = commissionAmount
-        self.numOfCommision = numOfCommission
-        
-    def getAmount(self):
-        return self.commision * self.numOfCommision
-    
-    def printText(self):
-        return f'total commision of {self.getAmount()}'
-    
-class Bonus:
-    def __init__(self,bonusAmount):
-        self.bonusAmount = bonusAmount
-        
-    def getAmount(self):
-        return self.bonusAmount
-    
-    def printText(self):
-        return f'recieved a bonus of {self.getAmount()}'
-    
-class EmployeeSalaries:
-    def __init__(self,contract,commission):
-        self.contract = contract
-        self.commission = commission
-        
-    def getTotalPay(self):
-        totalPay = 0
-        if self.contact:
-            totalPay += self.contact.getTotalPay()
-        
-        if self.commision:
-            totalPay += self.contract.getTotalPay()
-            
-    def printCommisionText(self):
-        if self.commision is None:
-            return "no commission"
-        return self.commission.printCommisionText()
-    
-    def printFullText(self):
-        return f'{self.contract.printText()}{(" and "+self.printCommissionText()) if self.commision is not None else ""}. Their total pay is {self.getAmount()}.'
-            
-        
+charlie_payroll = Payroll(HourlyContract(25,100), None)
+charlie = Employee('Charlie',charlie_payroll)
 
-# Billie works on a monthly salary of 4000.  Their total pay is 4000.
-billie = Employee('Billie')
+renee_payroll = Payroll(SalaryContract(3000), ContractCommision(200,4))
+renee = Employee('Renee',renee_payroll)
 
-# Charlie works on a contract of 100 hours at 25/hour.  Their total pay is 2500.
-charlie = Employee('Charlie')
+jan_payroll = Payroll(HourlyContract(25,150), ContractCommision(220,3))
+jan = Employee('Jan', jan_payroll)
 
-# Renee works on a monthly salary of 3000 and receives a commission for 4 contract(s) at 200/contract.  Their total pay is 3800.
-renee = Employee('Renee')
+robbie_payroll = Payroll(SalaryContract(2000), BonusCommision(1500))
+robbie = Employee('Robbie', robbie_payroll)
 
-# Jan works on a contract of 150 hours at 25/hour and receives a commission for 3 contract(s) at 220/contract.  Their total pay is 4410.
-jan = Employee('Jan')
-
-# Robbie works on a monthly salary of 2000 and receives a bonus commission of 1500.  Their total pay is 3500.
-robbie = Employee('Robbie')
-
-# Ariel works on a contract of 120 hours at 30/hour and receives a bonus commission of 600.  Their total pay is 4200.
-ariel = Employee('Ariel')
+ariel_payroll = Payroll(HourlyContract(30,120), BonusCommision(600))
+ariel = Employee('Ariel', ariel_payroll)
 
